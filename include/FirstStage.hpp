@@ -18,7 +18,6 @@ namespace gs {
  * In the future, caching (transposition table) and multithreading support may
  * be added.
  */
-template <typename Resource>
 class FirstStage {
 
 private:

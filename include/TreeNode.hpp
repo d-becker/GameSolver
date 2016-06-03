@@ -15,11 +15,7 @@ namespace gs {
  * tree that has been searched during the first stage of the game solver
  * algorithm. This information can later be used to optimize the order of
  * deeper searches.
- *
- * \param Resource The type of the underlying resource that holds information
- *        about the game state.
  */
-template <typename Resource>
 class TreeNode {
 public:
 	/**
@@ -27,10 +23,7 @@ public:
 	 *
 	 * \param state The game state of this node.
 	 *
-	 * \param alpha The calculated alpha value of the state of the game at
-	 *        this node.
-	 * \param beta The calculated beta value of the state of the game at
-	 *        this node.
+	 * \param value The value of the game state at this node.
 	 * \param maximizing \c true if the player to move at this stage is
 	 *        the maximizing player.
 	 * \param children The nodes that can be reached by taking the possible
@@ -38,7 +31,7 @@ public:
 	 * \param sort If this is \c true, the children will be sorted for
 	 *        optimization in later tree searches.
 	 */
-	TreeNode(const std::shared_ptr< const GameState<Resource> > state,
+	TreeNode(const std::shared_ptr<const GameState> state,
 		 eval_type value,
 		 bool maximizing,
 		 std::vector< std::shared_ptr<TreeNode> > children,
@@ -51,7 +44,7 @@ public:
 	{
 	}
 	
-        const std::shared_ptr< const GameState<Resource> > state;
+        const std::shared_ptr<const GameState> state;
 	const eval_type value;
 	const bool maximizing; // If the player to move at this stage is the
 	                       // maximizing player.

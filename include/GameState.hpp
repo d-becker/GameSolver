@@ -4,42 +4,16 @@
 #include <memory>
 #include <vector>
 
-#include "GameSolver/Patch.hpp"
+#include "GameSolver/GSTypes.hpp"
 
 namespace gs {
 
 /**
  * This is an interface that contains methods that manupilate and get
  * information about the state of the game.
- * The class is templated on the underlying resource that holds information
- * about the state of the game.
- *
- * \param Resource The underlying resource that holds information about the
- *        state of the game.
  */
-template <typename Resource>
 class GameState {
 public:
-	/**
-	 * Applies a move on the game state if it is possible.
-	 *
-	 * \param move The move to apply.
-	 *
-	 * \return \c true if the move could be applied; \c false otherwise.
-	 */
-	virtual bool apply_move(const Patch<Resource>& move) = 0;
-
-	/**
-	 * Reverts a move (that is, applies the inverse of the move) if it is
-	 * possible. It is not checked whether the given move actually was the
-	 * last taken.
-	 *
-	 * \param move The move to revert.
-	 *
-	 * \return \c true if the move could be reverted; \c false otherwise.
-	 */
-	virtual bool revert_move(const Patch<Resource>& move) = 0;
-
 	enum Result {
 		MAXIMIZING,
 		MINIMIZING,
@@ -59,13 +33,24 @@ public:
 	virtual Result get_winner() const = 0;
 
 	/**
-	 * Returns a vector containing patches that represent all the legal
-	 * moves the actual player can take at this game state.
+	 * Returns a vector containing (smart) pointers to the states that can
+	 * be reached from this state by legal moves.
 	 *
-	 * \return A vector containing patches that represent all the legal
-	 *         moves the actual player can take at this game state.
+	 * \return A vector containing (smart) pointers to the states that can
+	 *         be reached from this state by legal moves.
 	 */
-	virtual std::vector< Patch<Resource> > generate_moves() const = 0;
+        virtual std::vector< std::shared_ptr<GameState> >
+	generate_next_states() const = 0;
+
+	/**
+	 * Evaluates the current game state with a heuristic function.
+	 *
+	 * \return The value of this game state according to a
+	 *         heuristic function.
+	 *         Positive values are good for the maximizing player,
+	 *         negative values for the minimizing player.
+	 */
+	virtual eval_type evaluate() const = 0;
 
 	/**
 	 * Returns a shallow copy of this \c GameState object. The underlying
@@ -73,8 +58,7 @@ public:
 	 *
 	 * \return A shallow copy of this \c GameState object.
 	 */
-	virtual std::shared_ptr<GameState<Patch<Resource> > >
-	shallow_copy() const = 0;
+	virtual std::shared_ptr<GameState> shallow_copy() const = 0;
 
 	/**
 	 * Returns a deep copy of this \c GameState object. All underlying
@@ -83,8 +67,7 @@ public:
 	 *
 	 * \return A deep copy of this \c GameState object.
 	 */
-	virtual std::shared_ptr< GameState< Patch<Resource> > >
-	deep_copy() const = 0;
+	virtual std::shared_ptr<GameState> deep_copy() const = 0;
 };
 	
 } // namespace gs

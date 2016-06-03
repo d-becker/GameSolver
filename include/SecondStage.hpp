@@ -13,11 +13,7 @@ namespace gs {
  * This stage comes after the game tree search. In this stage, a game state is
  * evaluated in a faster and often less precise way, such as a heuristic
  * function or the Monte Carlo method.
- *
- * \param Resource The type of the underlying resource that holds information
- *        about the state of the game.
  */
-template <typename Resource>
 class SecondStage {
 public:
 	/**
@@ -32,7 +28,7 @@ public:
 	 *         negative values for the minimizing player.
 	 */
 	virtual eval_type
-	evaluate(std::shared_ptr< GameState<Resource> > game_state) const = 0;
+	evaluate(std::shared_ptr<GameState> game_state) const = 0;
 };
 
 } // namespace gs
