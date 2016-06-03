@@ -13,3 +13,6 @@ set(CPACK_SOURCE_IGNORE_FILES "bin;.*~;")
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
 add_subdirectory(src)
+
+# Unit tests
+add_subdirectory(test)

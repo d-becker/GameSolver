@@ -40,16 +40,23 @@ public:
 	 */
 	virtual bool revert_move(const Patch<Resource>& move) = 0;
 
+	enum Result {
+		MAXIMIZING,
+		MINIMIZING,
+		DRAW,
+		NONE
+	};
+	
 	/**
-	 * Checks whether the game is won. If the game is won by the maximizing
-	 * player, returns +1. If the game is won by the minimizing player,
-	 * returns -1. If the game is not won, returns 0.
+	 * Checks whether the game is won. The result is a member of the
+	 * enum \c Result.
 	 *
-	 * \returns +1 if the game is won by the maximizing player;
-	 *          -1 if the game is won by the minimizing player;
-	 *           0 if the game is not won.
+	 * \return \c MAXIMIZING if the maximizing player has won;
+	 *         \c MINIMIZING if the minimizing player has won;
+	 *         \c DRAW if the game has ended with a draw;
+	 *         \c NONE if the game is not over.
 	 */
-	virtual int get_winner() const = 0;
+	virtual Result get_winner() const = 0;
 
 	/**
 	 * Returns a vector containing patches that represent all the legal

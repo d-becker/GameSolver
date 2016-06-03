@@ -7,7 +7,6 @@
 
 #include "GameSolver/GameState.hpp"
 #include "GameSolver/GSTypes.hpp"
-#include "GameSolver/Patch.hpp"
 
 namespace gs {
 
@@ -26,8 +25,7 @@ public:
 	/**
 	 * Constructs a new \c TreeNode.
 	 *
-	 * \param patch The patch that has been applied to the parent node's
-	 *        state to obtain the state of this node.
+	 * \param state The game state of this node.
 	 *
 	 * \param alpha The calculated alpha value of the state of the game at
 	 *        this node.
@@ -40,24 +38,21 @@ public:
 	 * \param sort If this is \c true, the children will be sorted for
 	 *        optimization in later tree searches.
 	 */
-	TreeNode(Patch<Resource> patch,
-		 eval_type alpha,
-		 eval_type beta,
+	TreeNode(const std::shared_ptr< const GameState<Resource> > state,
+		 eval_type value,
 		 bool maximizing,
 		 std::vector< std::shared_ptr<TreeNode> > children,
 		 bool sort = true)
-		: patch(patch),
-		  alpha(alpha),
-		  beta(beta),
+		: state(state),
+		  value(value),
 		  maximizing(maximizing),
-		  children(sort ? sorted_vector(children) : children),
-		  sorted(sort)
+		  sorted(sort),
+		  children(sort ? sorted_vector(children) : children)
 	{
 	}
 	
-        const Patch<Resource> patch;
-	const eval_type alpha;
-	const eval_type beta;
+        const std::shared_ptr< const GameState<Resource> > state;
+	const eval_type value;
 	const bool maximizing; // If the player to move at this stage is the
 	                       // maximizing player.
 
@@ -71,9 +66,9 @@ private:
 				  std::shared_ptr<TreeNode> child2) -> bool {
 			if (child1 && child2) {
 			        if (maximizing) {
-					return child1->alpha > child2->alpha;
+					return child1->value > child2->value;
 				} else {
-					return child1->beta < child2->beta;
+					return child1->value < child2->value;
 				}
 			} else if (child1) {
 				return true;
