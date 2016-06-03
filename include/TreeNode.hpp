@@ -35,14 +35,7 @@ public:
 		 eval_type value,
 		 bool maximizing,
 		 std::vector< std::shared_ptr<TreeNode> > children,
-		 bool sort = true)
-		: state(state),
-		  value(value),
-		  maximizing(maximizing),
-		  sorted(sort),
-		  children(sort ? sorted_vector(children) : children)
-	{
-	}
+		 bool sort = true);
 	
         const std::shared_ptr<const GameState> state;
 	const eval_type value;
@@ -53,26 +46,7 @@ public:
 	const std::vector< std::shared_ptr<TreeNode> > children;
 
 private:
-        std::vector< std::shared_ptr<TreeNode> >
-	sorted_vector(std::vector< std::shared_ptr<TreeNode> > children) const {
-		auto cmp = [this](std::shared_ptr<TreeNode> child1,
-				  std::shared_ptr<TreeNode> child2) -> bool {
-			if (child1 && child2) {
-			        if (maximizing) {
-					return child1->value > child2->value;
-				} else {
-					return child1->value < child2->value;
-				}
-			} else if (child1) {
-				return true;
-			} else {
-				return false;
-			}
-		};
-
-		std::sort(children.begin(), children.end(), cmp);
-		return children;
-	}
+        
 };
 
 } // namespace gs
