@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "GameSolver/GameState.hpp"
-#include "GameSolver/Patch.hpp"
+#include "GameSolver/GSTypes.hpp"
 #include "GameSolver/TreeNode.hpp"
 
 namespace gs {
@@ -21,6 +21,11 @@ namespace gs {
 class FirstStage {
 
 private:
+	TreeNode alpha_beta_pure(std::shared_ptr<GameState> game_state,
+				 size_t depth,
+				 eval_type alpha,
+				 eval_type beta,
+				 bool maximizing) const;
 };
 
 } // namespace gs
