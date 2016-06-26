@@ -43,4 +43,9 @@ TreeNode::TreeNode(const std::shared_ptr<const GameState> state,
 {
 }
 
+/*bool trees_equal(std::shared_ptr<TreeNode> lhs,
+		 std::shared_ptr<TreeNode> rhs) {
+	
+		 }*/
+
 } // namespace gs

@@ -49,6 +49,20 @@ private:
         
 };
 
+/**
+ * Checks if two trees of \c TreeNode elements are equal. Two trees are
+ * considered equal iff nodes in the two trees pairwise contain the same data
+ * (state, value, player and sorting information) and the relations between the
+ * nodes also match.
+ *
+ * \param lhs The root of the first tree.
+ * \param rhs The root of the second tree.
+ *
+ * \return \c true if the two trees are equal; \c false otherwise.
+ */
+/*bool trees_equal(std::shared_ptr<TreeNode> lhs,
+		 std::shared_ptr<TreeNode> rhs);*/
+
 } // namespace gs
 
 #endif // GS_TREE_NODE_HPP

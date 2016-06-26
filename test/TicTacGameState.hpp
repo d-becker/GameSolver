@@ -8,6 +8,49 @@
 
 #include "GameSolver/GameState.hpp"
 
+class Vec2 {
+public:
+	Vec2(int p_x,
+	     int p_y)
+		: x(p_x),
+		  y(p_y)
+	{
+	}
+
+	Vec2& operator+=(const Vec2& other) {
+		x += other.x;
+		y += other.y;
+		return *this;
+	}
+
+	Vec2& operator-=(const Vec2& other) {
+		x -= other.x;
+		y -= other.y;
+		return *this;
+	}
+        
+	int x;
+	int y;
+};
+
+inline
+bool operator==(const Vec2& lhs,
+		       const Vec2& rhs) {
+	return lhs.x == rhs.x && lhs.y == rhs.y;
+}
+
+inline
+Vec2 operator+(Vec2 lhs,
+	       const Vec2& rhs) {
+	return lhs += rhs;
+}
+
+inline
+Vec2 operator-(Vec2 lhs,
+	       const Vec2& rhs) {
+	return lhs -= rhs;
+}
+
 /**
  * A very simple tic-tac-toe like class used for testing the game solver.
  *

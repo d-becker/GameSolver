@@ -20,12 +20,13 @@ namespace gs {
  */
 class FirstStage {
 
-private:
-	TreeNode alpha_beta_pure(std::shared_ptr<GameState> game_state,
-				 size_t depth,
-				 eval_type alpha,
-				 eval_type beta,
-				 bool maximizing) const;
+public:
+	std::shared_ptr<TreeNode> alpha_beta_pure(
+					std::shared_ptr<GameState> game_state,
+					size_t depth,
+					eval_type alpha,
+					eval_type beta,
+					bool maximizing) const;
 };
 
 } // namespace gs
