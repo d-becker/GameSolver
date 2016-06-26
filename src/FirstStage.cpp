@@ -21,6 +21,11 @@ std::shared_ptr<TreeNode> FirstStage::alpha_beta_pure(
 						   game_state->evaluate(),
 						   maximizing, empty_child_vec);
 	}
+
+	/*if (game_state != GameState.NONE) {
+		eval_type value = game_state->evaluate();
+		return std::make_shared<TreeNode>(game_state, value
+	}*/
 }
   
 } // namespace gs
