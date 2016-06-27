@@ -90,3 +90,17 @@ TEST_F(FirstStageABTest, HeuristicOnGameOver) {
 
 	ASSERT_EQ(heuristic, node_value);
 }
+
+TEST_F(FirstStageABTest, NumberOfChildren) {
+	std::shared_ptr<TreeNode> node =
+		first_stage.alpha_beta_pure(game, 1, alpha_start,
+					    beta_start, true);
+	if (!node)
+		FAIL() << "Null node returned.";
+	
+	int exp_num_of_children = game->cols * game->rows
+		                          - game->get_steps_taken();
+	int num_of_children = node->children.size();
+
+	ASSERT_EQ(exp_num_of_children, num_of_children);
+}

@@ -2,6 +2,22 @@
 
 namespace gs {
 
+namespace /* anonymous */ {
+
+std::shared_ptr<TreeNode> alpha_beta_pure_proper(
+	                                std::shared_ptr<GameState> game_state,
+					size_t depth,
+					eval_type alpha,
+					eval_type beta,
+					bool maximizing)
+{
+	std::vector< std::shared_ptr<GameState> > next_states
+		= game_state->generate_next_states();
+	return nullptr;
+}
+
+} // anonymous namespace
+
 std::shared_ptr<TreeNode> FirstStage::alpha_beta_pure(
 	                                std::shared_ptr<GameState> game_state,
 					size_t depth,
@@ -23,7 +39,8 @@ std::shared_ptr<TreeNode> FirstStage::alpha_beta_pure(
 	}
 
 	// TODO.
-	return nullptr;
+	return alpha_beta_pure_proper(game_state, depth,
+				      alpha, beta, maximizing);
 }
   
 } // namespace gs

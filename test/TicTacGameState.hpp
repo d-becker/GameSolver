@@ -158,6 +158,10 @@ public:
 		return res;
 	}
 
+	int get_steps_taken() const {
+		return m_steps_taken;
+	}
+
 	/**
 	 * Dumps the state of the board to the given stream.
 	 *
