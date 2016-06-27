@@ -2,6 +2,7 @@
 #define GS_TEST_TIC_TAC_GAME_STATE
 
 #include <iostream>
+#include <limits>
 #include <memory>
 #include <string>
 #include <vector>
@@ -204,7 +205,15 @@ public:
 	}
 
 	virtual gs::eval_type evaluate() const override {
-		// TODO
+		Result winner = get_winner();
+		if (winner == GameState::MAXIMIZING)
+			return std::numeric_limits<gs::eval_type>::max();
+		if (winner == GameState::MINIMIZING)
+			return std::numeric_limits<gs::eval_type>::lowest();
+		if (winner == GameState::DRAW)
+			return 0;
+
+		// TODO - heuristic value if the game is not over.
 		return 0;
 	}
 

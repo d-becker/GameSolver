@@ -10,7 +10,7 @@
 
 using namespace gs;
 
-TEST(TestingTest, TT) {
+/*TEST(TestingTest, TT) {
 	using namespace std;
 	TicTacGameState game(3, 3, 3);
 	cout << "Original: " << endl;
@@ -36,7 +36,7 @@ TEST(TestingTest, TT) {
 	}
 
 	FAIL();
-}
+}*/
 
 class FirstStageABTest : public ::testing::Test {
 protected:
@@ -82,5 +82,11 @@ TEST_F(FirstStageABTest, HeuristicOnGameOver) {
 
 	game->move(0, 2);
 
-	FAIL();
+        eval_type heuristic = game->evaluate();
+	std::shared_ptr<TreeNode> node =
+		first_stage.alpha_beta_pure(game, 5, alpha_start,
+					    beta_start, true);
+	eval_type node_value = node->value;
+
+	ASSERT_EQ(heuristic, node_value);
 }

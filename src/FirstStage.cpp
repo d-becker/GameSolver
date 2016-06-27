@@ -16,16 +16,14 @@ std::shared_ptr<TreeNode> FirstStage::alpha_beta_pure(
 						  maximizing, empty_child_vec);
 	}
 
-	if (depth == 0) {
+	if (depth == 0 || game_state->get_winner() != GameState::NONE) {
 		return  std::make_shared<TreeNode>(game_state,
 						   game_state->evaluate(),
 						   maximizing, empty_child_vec);
 	}
 
-	/*if (game_state != GameState.NONE) {
-		eval_type value = game_state->evaluate();
-		return std::make_shared<TreeNode>(game_state, value
-	}*/
+	// TODO.
+	return nullptr;
 }
   
 } // namespace gs
