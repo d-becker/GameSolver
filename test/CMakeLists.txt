@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.8)
 
 set(TEST_SRC_FILES
 	main_unit_test.cpp
-	FirstStageTest.cpp
+	AlphaBetaTest.cpp
 	TreeNodeTest.cpp
    )
 
