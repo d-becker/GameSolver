@@ -1,5 +1,5 @@
-#ifndef GS_SECOND_STAGE_HPP
-#define GS_SECOND_STAGE_HPP
+#ifndef GS_EVALUATION_HPP
+#define GS_EVALUATION_HPP
 
 #include <memory>
 
@@ -14,7 +14,7 @@ namespace gs {
  * evaluated in a faster and often less precise way, such as a heuristic
  * function or the Monte Carlo method.
  */
-class SecondStage {
+class Evaluation {
 public:
 	/**
 	 * Evaluates the given game state with a fast, for example heuristic or
@@ -33,4 +33,4 @@ public:
 
 } // namespace gs
 
-#endif // GS_SECOND_STAGE_HPP
+#endif // GS_EVALUATION_HPP
