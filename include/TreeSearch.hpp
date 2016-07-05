@@ -1,7 +1,6 @@
-#ifndef GS_FIRST_STAGE_HPP
-#define GS_FIRST_STAGE_HPP
+#ifndef GS_TREE_SEARCH_HPP
+#define GS_TREE_SEARCH_HPP
 
-#include <cstddef>
 #include <memory>
 #include <vector>
 
@@ -19,11 +18,11 @@ namespace gs {
  * be added.
  */
 template <typename Resource>
-class FirstStage {
+class TreeSearch {
 
 private:
 };
 
 } // namespace gs
 
-#endif // GS_FIRST_STAGE_HPP
+#endif // GS_TREE_SEARCH_HPP

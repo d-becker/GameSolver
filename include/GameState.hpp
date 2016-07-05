@@ -68,6 +68,13 @@ public:
 	virtual std::vector< Patch<Resource> > generate_moves() const = 0;
 
 	/**
+	 * Returns a pointer to the underlying resource.
+	 *
+	 * \return A pointer to the underlying resource.
+	 */
+	virtual const Resource *get_resource() const = 0;
+
+	/**
 	 * Returns a shallow copy of this \c GameState object. The underlying
 	 * resources are not (necessarily) copied.
 	 *

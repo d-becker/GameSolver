@@ -1,5 +1,5 @@
-#ifndef GS_SECOND_STAGE_HPP
-#define GS_SECOND_STAGE_HPP
+#ifndef GS_EVALUATION_HPP
+#define GS_EVALUATION_HPP
 
 #include <memory>
 
@@ -18,7 +18,7 @@ namespace gs {
  *        about the state of the game.
  */
 template <typename Resource>
-class SecondStage {
+class Evaluation {
 public:
 	/**
 	 * Evaluates the given game state with a fast, for example heuristic or
@@ -37,4 +37,4 @@ public:
 
 } // namespace gs
 
-#endif // GS_SECOND_STAGE_HPP
+#endif // GS_EVALUATION_HPP
