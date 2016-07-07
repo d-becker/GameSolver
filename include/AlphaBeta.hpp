@@ -30,6 +30,15 @@ public:
 					bool maximizing,
 		                        std::function<eval_type(std::shared_ptr<
 						       GameState>)> eval) const;
+private:
+	std::shared_ptr<TreeNode> alpha_beta_pure_proper(
+					std::shared_ptr<GameState> game_state,
+					size_t depth,
+					eval_type alpha,
+					eval_type beta,
+					bool maximizing,
+		                        std::function<eval_type(std::shared_ptr<
+						       GameState>)> eval) const;
 };
 
 } // namespace gs
