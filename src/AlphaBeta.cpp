@@ -5,14 +5,27 @@
 
 namespace gs {
 
-std::shared_ptr<TreeNode> AlphaBeta::alpha_beta_pure(
-	                                std::shared_ptr<GameState> game_state,
-					size_t depth,
-					eval_type alpha,
-					eval_type beta,
-					bool maximizing,
-					std::function<eval_type(std::shared_ptr<
-						        GameState>)> eval) const
+std::shared_ptr<TreeNode>
+AlphaBeta::search_tree(std::shared_ptr<GameState> game_state,
+		       size_t depth,
+		       bool maximizing,
+		       std::function<
+		           eval_type(std::shared_ptr<GameState>)> eval)
+{
+	return alpha_beta_pure(game_state, depth,
+			       std::numeric_limits<eval_type>::lowest(),
+			       std::numeric_limits<eval_type>::max(),
+			       maximizing, eval);
+}
+
+std::shared_ptr<TreeNode>
+AlphaBeta::alpha_beta_pure(std::shared_ptr<GameState> game_state,
+			   size_t depth,
+			   eval_type alpha,
+			   eval_type beta,
+			   bool maximizing,
+			   std::function<eval_type(
+				   std::shared_ptr<GameState>)> eval) const
 {
 	static const std::vector< std::shared_ptr<TreeNode> > empty_child_vec{};
 	
@@ -33,14 +46,14 @@ std::shared_ptr<TreeNode> AlphaBeta::alpha_beta_pure(
 }
 
 // Private
-std::shared_ptr<TreeNode> AlphaBeta::alpha_beta_pure_proper(
-	                                std::shared_ptr<GameState> game_state,
-					size_t depth,
-					eval_type alpha,
-					eval_type beta,
-					bool maximizing,
-					std::function<eval_type(std::shared_ptr<
-							GameState>)> eval) const
+std::shared_ptr<TreeNode>
+AlphaBeta::alpha_beta_pure_proper(std::shared_ptr<GameState> game_state,
+				  size_t depth,
+				  eval_type alpha,
+				  eval_type beta,
+				  bool maximizing,
+				  std::function<eval_type(
+				      std::shared_ptr<GameState>)> eval) const
 {
 	std::vector< std::shared_ptr<GameState> > children
 		= game_state->generate_next_states();

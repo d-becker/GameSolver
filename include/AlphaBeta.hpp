@@ -9,6 +9,7 @@
 #include "GameSolver/GameState.hpp"
 #include "GameSolver/GSTypes.hpp"
 #include "GameSolver/TreeNode.hpp"
+#include "GameSolver/TreeSearch.hpp"
 
 namespace gs {
 
@@ -19,9 +20,15 @@ namespace gs {
  * In the future, caching (transposition table) and multithreading support may
  * be added.
  */
-class AlphaBeta {
-
+class AlphaBeta : public TreeSearch {
 public:
+	virtual std::shared_ptr<TreeNode>
+	search_tree(std::shared_ptr<GameState> game_state,
+		    size_t depth,
+		    bool maximizing,
+		    std::function<
+		            eval_type(std::shared_ptr<GameState>)> eval) override;
+	
 	std::shared_ptr<TreeNode> alpha_beta_pure(
 					std::shared_ptr<GameState> game_state,
 					size_t depth,
