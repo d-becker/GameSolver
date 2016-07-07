@@ -1,7 +1,7 @@
 #include <iostream>
 
+#include "GameSolver/Evaluation.hpp"
 #include "GameSolver/GameState.hpp"
-#include "GameSolver/SecondStage.hpp"
 #include "GameSolver/TreeNode.hpp"
 
 using namespace std;

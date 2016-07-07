@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <functional>
 
 using namespace gs;
 
@@ -47,6 +48,11 @@ protected:
 
 	std::shared_ptr<TicTacGameState> game =
 		std::make_shared<TicTacGameState>(3, 3, 3);
+
+	std::function<eval_type(std::shared_ptr<GameState>)> eval
+	        = [](std::shared_ptr<GameState> game_state) -> eval_type {
+		return evaluate(static_cast<TicTacGameState*>(game_state.get()));
+	};
 };
 
 TEST_F(AlphaBetaTest, ZeroWhenNullPtr) {
@@ -54,7 +60,7 @@ TEST_F(AlphaBetaTest, ZeroWhenNullPtr) {
 
 	std::shared_ptr<TreeNode> node =
 		first_stage.alpha_beta_pure(nullptr, 3, alpha_start,
-					    beta_start, true);
+					    beta_start, true, eval);
 
 	eval_type node_value = node->value;
 	ASSERT_EQ(zero, node_value);
@@ -64,10 +70,10 @@ TEST_F(AlphaBetaTest, HeuristicAtLastPly) {
 	game->move(0, 0);
 
 
-	eval_type heuristic = game->evaluate();
+	eval_type heuristic = eval(game);
 	std::shared_ptr<TreeNode> node =
 		first_stage.alpha_beta_pure(game, 0, alpha_start,
-					    beta_start, true);
+					    beta_start, true, eval);
 	eval_type node_value = node->value;
 
 	ASSERT_EQ(heuristic, node_value);
@@ -82,10 +88,10 @@ TEST_F(AlphaBetaTest, HeuristicOnGameOver) {
 
 	game->move(0, 2);
 
-        eval_type heuristic = game->evaluate();
+        eval_type heuristic = eval(game);
 	std::shared_ptr<TreeNode> node =
 		first_stage.alpha_beta_pure(game, 5, alpha_start,
-					    beta_start, true);
+					    beta_start, true, eval);
 	eval_type node_value = node->value;
 
 	ASSERT_EQ(heuristic, node_value);
@@ -94,7 +100,7 @@ TEST_F(AlphaBetaTest, HeuristicOnGameOver) {
 TEST_F(AlphaBetaTest, NumberOfChildren) {
 	std::shared_ptr<TreeNode> node =
 		first_stage.alpha_beta_pure(game, 1, alpha_start,
-					    beta_start, true);
+					    beta_start, true, eval);
 	if (!node)
 		FAIL() << "Null node returned.";
 	

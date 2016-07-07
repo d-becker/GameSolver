@@ -2,6 +2,7 @@
 #define GS_ALPHA_BETA_HPP
 
 #include <cstddef>
+#include <functional>
 #include <memory>
 #include <vector>
 
@@ -26,7 +27,9 @@ public:
 					size_t depth,
 					eval_type alpha,
 					eval_type beta,
-					bool maximizing) const;
+					bool maximizing,
+		                        std::function<eval_type(std::shared_ptr<
+						       GameState>)> eval) const;
 };
 
 } // namespace gs

@@ -208,19 +208,6 @@ public:
 		return res;
 	}
 
-	virtual gs::eval_type evaluate() const override {
-		Result winner = get_winner();
-		if (winner == GameState::MAXIMIZING)
-			return std::numeric_limits<gs::eval_type>::max();
-		if (winner == GameState::MINIMIZING)
-			return std::numeric_limits<gs::eval_type>::lowest();
-		if (winner == GameState::DRAW)
-			return 0;
-
-		// TODO - heuristic value if the game is not over.
-		return 0;
-	}
-
 	virtual std::shared_ptr<GameState> shallow_copy() const override {
 		return deep_copy();
 	}
@@ -285,5 +272,24 @@ private:
 	bool m_first_player;
 	std::vector< std::vector<int> > m_table;
 };
+
+// Free functions
+gs::eval_type evaluate(TicTacGameState *state) {
+	using namespace gs;
+	
+	if (!state)
+		return 0;
+	
+	GameState::Result winner = state->get_winner();
+	if (winner == GameState::MAXIMIZING)
+		return std::numeric_limits<gs::eval_type>::max();
+	if (winner == GameState::MINIMIZING)
+		return std::numeric_limits<gs::eval_type>::lowest();
+	if (winner == GameState::DRAW)
+		return 0;
+
+	// TODO - heuristic value if the game is not over.
+	return 0;
+}
 
 #endif // GS_TEST_TIC_TAC_GAME_STATE

@@ -20,10 +20,6 @@ public:
 		return {};
 	}
 
-	virtual eval_type evaluate() const override {
-		return 0;
-	}
-
         virtual std::shared_ptr<GameState> shallow_copy() const override {
 		return nullptr;
 	}

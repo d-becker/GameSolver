@@ -50,7 +50,7 @@ public:
 	 *         Positive values are good for the maximizing player,
 	 *         negative values for the minimizing player.
 	 */
-	virtual eval_type evaluate() const = 0;
+	/*virtual eval_type evaluate() const = 0;*/
 
 	/**
 	 * Returns a shallow copy of this \c GameState object. The underlying
